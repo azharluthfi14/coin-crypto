@@ -15,9 +15,8 @@ const DetailPage = () => {
   const { data, isFetching } = useGetCoinDetailsQuery(coinId);
   const { data: coinHistory } = useGetCoinHistoryQuery({ coinId, timeperiod });
   const coinDetails = data?.data?.coin;
-  useEffect(() => {
-    console.log(coinDetails);
-  });
+
+  const time = ["3h", "24h", "7d", "30d"];
 
   return (
     <>
@@ -40,9 +39,9 @@ const DetailPage = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
               <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
@@ -93,11 +92,30 @@ const DetailPage = () => {
           </div>
 
           <div>
-            <p className="text-sm">{data?.data?.coin.name} Price Chart (USD)</p>
+            <div className="flex justify-between items-center">
+              <p className="text-sm">
+                {data?.data?.coin.name} Price Chart (USD)
+              </p>
+              <div className="flex items-center space-x-3">
+                {time.map((item) => (
+                  <button
+                    className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
+                    type="submit"
+                    key={item}
+                    value={item}
+                    onClick={(e) => setTimeperiod(e.target.value)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-            <div>
+            <div className="mt-3.5">
               <LineChart
-                currentPrice={millify(data?.data?.coin.price)}
+                width={200}
+                height={55}
+                currentPrice={data?.data?.coin.price}
                 coinHistory={coinHistory}
               />
             </div>
