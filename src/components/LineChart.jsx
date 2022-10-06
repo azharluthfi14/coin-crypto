@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import moment from "moment/moment";
 
 export const formatValue = (value) =>
   Intl.NumberFormat("en-US", {
@@ -11,18 +12,24 @@ export const formatValue = (value) =>
 
 const LineChart = ({ coinHistory, currentPrice, width, height }) => {
   const coinPrice = [];
-  const canvas = useRef(null);
+
   const coinTimestamp = [];
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
     coinPrice.push(coinHistory?.data?.history[i].price);
   }
 
-  for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
+  /* for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
     coinTimestamp.push(
       new Date(
         coinHistory?.data?.history[i].timestamp * 1000
-      ).toLocaleDateString()
+      ).toLocaleDateString("en-US", dateFormat)
+    );
+  } */
+
+  for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
+    coinTimestamp.push(
+      moment(coinHistory?.data?.history[i].timestamp * 1000).format("ll")
     );
   }
 
@@ -30,11 +37,15 @@ const LineChart = ({ coinHistory, currentPrice, width, height }) => {
     labels: coinTimestamp,
     datasets: [
       {
-        label: "Price In USD",
+        label: "",
         data: coinPrice,
         fill: false,
-        backgroundColor: "#0071bd",
+        backgroundColor:
+          "linear-gradient(to top, rgba(255,0,0,0), rgba(255,0,0,1))",
         borderColor: "#0071bd",
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.1,
       },
     ],
   };
@@ -43,10 +54,14 @@ const LineChart = ({ coinHistory, currentPrice, width, height }) => {
     scales: {
       x: {
         display: true,
+        reverse: true,
       },
       y: {
         display: true,
       },
+    },
+    interaction: {
+      intersect: false,
     },
     plugins: {
       tooltip: {
@@ -57,6 +72,21 @@ const LineChart = ({ coinHistory, currentPrice, width, height }) => {
       },
       legend: {
         display: false,
+      },
+      afterDraw: (chart) => {
+        if (chart.tooltip?._active?.length) {
+          let x = chart.tooltip._active[0].element.x;
+          let yAxis = chart.scales.y;
+          let ctx = chart.ctx;
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(x, yAxis.top);
+          ctx.lineTo(x, yAxis.bottom);
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = "#ff0000";
+          ctx.stroke();
+          ctx.restore();
+        }
       },
     },
   };
@@ -109,13 +139,7 @@ const LineChart = ({ coinHistory, currentPrice, width, height }) => {
   //   });
 
   return (
-    <Line
-      ref={canvas}
-      width={width}
-      height={height}
-      data={data}
-      options={options}
-    ></Line>
+    <Line width={width} height={height} data={data} options={options}></Line>
   );
 };
 

@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetCoinsQuery } from "../api/coinApi";
 import SparkLineChart from "../components/SparkLineChart";
+import Spinner from "../components/Spinner";
 
 const IndexPage = () => {
-  const { data: coinLists } = useGetCoinsQuery(20);
+  const { data: coinLists, isFetching } = useGetCoinsQuery(20);
   const [coins, setCoins] = useState();
   const navigate = useNavigate();
 
@@ -15,6 +16,8 @@ const IndexPage = () => {
   useEffect(() => {
     setCoins(coinLists?.data?.coins);
   }, [coinLists]);
+
+  if (isFetching) return <Spinner />;
 
   return (
     <>

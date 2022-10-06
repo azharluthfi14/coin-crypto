@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetCoinDetailsQuery, useGetCoinHistoryQuery } from "../api/coinApi";
 import LineChart from "../components/LineChart";
+import LineChartCoin from "../components/LineChartCoin";
 import millify from "millify";
+import Spinner from "../components/Spinner";
 
 const DetailPage = () => {
   const { coinId } = useParams();
@@ -17,7 +19,7 @@ const DetailPage = () => {
   const coinDetails = data?.data?.coin;
 
   const time = ["3h", "24h", "7d", "30d"];
-
+  if (isFetching) return <Spinner />;
   return (
     <>
       <nav className="flex">
@@ -112,12 +114,61 @@ const DetailPage = () => {
             </div>
 
             <div className="mt-3.5">
-              <LineChart
+              {/* <LineChart
                 width={200}
-                height={55}
+                height={75}
                 currentPrice={data?.data?.coin.price}
                 coinHistory={coinHistory}
-              />
+              /> */}
+              <div className="h-fit">
+                <LineChartCoin
+                  width={350}
+                  height={500}
+                  datacoin={coinHistory}
+                />
+              </div>
+              <div className="mt-5 flex space-x-10 items-center">
+                <div>
+                  <h5 className="font-semibold mb-1 text-sm text-slate-700">
+                    Market Cap (USD)
+                  </h5>
+                  <span className="font-semibold text-xl">
+                    ${millify(data?.data?.coin.marketCap, { precision: 3 })}
+                  </span>
+                </div>
+                <div>
+                  <h5 className="font-semibold mb-1 text-sm text-slate-700">
+                    24H VOLUME (USD)
+                  </h5>
+                  <span className="font-semibold text-xl">
+                    ${millify(data?.data?.coin["24hVolume"], { precision: 3 })}
+                  </span>
+                </div>
+                <div>
+                  <h5 className="font-semibold mb-1 text-sm text-slate-700">
+                    Circulating Supply
+                  </h5>
+                  <span className="font-semibold text-xl">
+                    {millify(data?.data?.coin.supply.circulating, {
+                      precision: 3,
+                    })}{" "}
+                    {data?.data?.coin.symbol}
+                  </span>
+                </div>
+                <div>
+                  <h5 className="font-semibold mb-1 text-sm text-slate-700">
+                    Max Supply
+                  </h5>
+                  {data?.data?.coin.supply.max === null ? (
+                    <span className="font-semibold text-xl">N/A</span>
+                  ) : (
+                    <span className="font-semibold text-xl">
+                      {millify(data?.data?.coin.supply.max)}{" "}
+                      {data?.data?.coin.symbol}
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

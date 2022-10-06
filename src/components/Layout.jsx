@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      <div className="h-full bg-gray-100 py-10">
+      <div className="h-full bg-gray-100 py-5">
         <div className="layout">
           <Outlet />
         </div>

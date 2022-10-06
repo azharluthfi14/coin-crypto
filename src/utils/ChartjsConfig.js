@@ -35,6 +35,7 @@ Chart.register({
         chartArea.right - chartArea.left,
         chartArea.bottom - chartArea.top
       );
+
       ctx.restore();
     }
   },

@@ -11,7 +11,6 @@ import {
   CategoryScale,
 } from "chart.js";
 import "chartjs-adapter-moment";
-import { useGetCoinHistoryQuery } from "../api/coinApi";
 
 Chart.register(
   LineController,
