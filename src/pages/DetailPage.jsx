@@ -11,15 +11,22 @@ const DetailPage = () => {
   const [timeperiod, setTimeperiod] = useState("1h");
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   const { data, isFetching } = useGetCoinDetailsQuery(coinId);
-  const { data: coinHistory } = useGetCoinHistoryQuery({ coinId, timeperiod });
+  const { data: coinHistory } = useGetCoinHistoryQuery({
+    coinId,
+    timeperiod,
+  });
   const coinDetails = data?.data?.coin;
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const time = ["3h", "24h", "7d", "30d"];
   if (isFetching) return <Spinner />;
+
   return (
     <>
       <nav className="flex">
@@ -29,7 +36,7 @@ const DetailPage = () => {
               onClick={() => handleBack()}
               className="inline-flex items-center cursor-pointer hover:underline text-sm font-medium text-gray-700 hover:text-gray-900"
             >
-              All coin
+              Home
             </div>
           </li>
           <li aria-current="page">
@@ -125,6 +132,7 @@ const DetailPage = () => {
                   width={350}
                   height={500}
                   datacoin={coinHistory}
+                  bdcolor={data?.data?.coin.change < 0 ? "#ff3e3e" : "#22c55e"}
                 />
               </div>
               <div className="mt-5 flex space-x-10 items-center">

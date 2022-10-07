@@ -16,6 +16,12 @@ export const coinApi = createApi({
     getCoins: builder.query({
       query: (count) => createRequest(`coins?limit=${count}`),
     }),
+    getStableCoins: builder.query({
+      query: (count) =>
+        createRequest(
+          `coins?timePeriod=24h&tags%5B0%5D=metaverse&orderBy=marketCap&limit=${count}&offset=0`
+        ),
+    }),
     getCoinHistory: builder.query({
       query: ({ timeperiod, coinId }) =>
         createRequest(`coin/${coinId}/history?timePeriod=${timeperiod}`),
@@ -29,6 +35,7 @@ export const coinApi = createApi({
 // Custom hook
 export const {
   useGetCoinsQuery,
+  useGetStableCoinsQuery,
   useGetCoinHistoryQuery,
   useGetCoinDetailsQuery,
 } = coinApi;

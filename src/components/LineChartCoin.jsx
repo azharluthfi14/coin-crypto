@@ -23,7 +23,7 @@ Chart.register(
   LineElement
 );
 
-const LineChartCoin = ({ datacoin, width, height }) => {
+const LineChartCoin = ({ datacoin, width, height, bdcolor }) => {
   const canvas = useRef(null);
   let coinPrice = [];
   let coinTimestamp = [];
@@ -51,7 +51,9 @@ const LineChartCoin = ({ datacoin, width, height }) => {
             tension: 0.1,
             label: "",
             pointRadius: 0,
-            borderColor: "#1199fa",
+
+            borderColor: bdcolor,
+
             borderWidth: 1.7,
           },
         ],

@@ -2,10 +2,10 @@ import React from "react";
 
 const Spinner = () => {
   return (
-    <div className="h-screen flex mt-40 justify-center">
+    <div className="h-screen flex z-30  mt-40 justify-center">
       <div className="flex flex-col items-center text-center">
         <svg
-          className="animate-spin h-12 w-12 text-slate-500"
+          className="animate-spin h-12 w-12 text-violet-500"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
