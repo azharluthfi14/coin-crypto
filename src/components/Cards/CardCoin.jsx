@@ -1,32 +1,32 @@
 import { useState, useEffect } from "react";
-import { useGetStableCoinsQuery } from "../api/coinApi";
-import SparkLineChart from "./SparkLineChart";
-import Slider from "react-slick";
-import SkeletonCard from "./SkeletonCard";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { useGetStableCoinsQuery } from "../../api/coinApi";
+import { useNavigate } from "react-router-dom";
+import SparkLineChart from "../Chart/SparkLineChart";
+import CardSkeleton from "../Skeleton/CardSkeleton";
 
 const CardCoin = () => {
   const { data: coinLists, isFetching } = useGetStableCoinsQuery(4);
   const [coins, setCoins] = useState();
+  const navigate = useNavigate();
+
+  const handleNavigate = (coinId) => {
+    navigate(`/${coinId}`);
+  };
 
   useEffect(() => {
     setCoins(coinLists?.data?.coins);
   }, [coinLists]);
 
-  const sliderSettings = {
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    infinite: true,
-    arrows: false,
-  };
-
-  if (isFetching) return <SkeletonCard count={4} />;
+  if (isFetching) return <CardSkeleton count={4} />;
 
   return (
     <>
       {coins?.map((coin) => (
-        <div key={coin.uuid} className="bg-white p-3.5 rounded">
+        <div
+          onClick={() => handleNavigate(coin.uuid)}
+          key={coin.uuid}
+          className="bg-white p-3.5 rounded cursor-pointer"
+        >
           <div className="flex justify-between items-center">
             <div>
               <img className="w-9 h-9" src={coin.iconUrl} alt="" />

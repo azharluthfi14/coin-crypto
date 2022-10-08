@@ -1,6 +1,6 @@
 import React from "react";
 
-const SkeletonCard = ({ count }) => {
+const CardSkeleton = ({ count }) => {
   return [...Array(count).keys()].map((i) => (
     <div key={i} className="bg-white w-full p-3.5 rounded">
       <div className="animate-pulse">
@@ -17,4 +17,4 @@ const SkeletonCard = ({ count }) => {
   ));
 };
 
-export default SkeletonCard;
+export default CardSkeleton;

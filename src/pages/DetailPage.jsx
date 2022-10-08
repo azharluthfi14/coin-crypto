@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetCoinDetailsQuery, useGetCoinHistoryQuery } from "../api/coinApi";
-import LineChart from "../components/LineChart";
-import LineChartCoin from "../components/LineChartCoin";
+import LineChart from "../components/Chart/LineChart";
 import millify from "millify";
 import Spinner from "../components/Spinner";
 
@@ -19,12 +18,12 @@ const DetailPage = () => {
     coinId,
     timeperiod,
   });
-  const coinDetails = data?.data?.coin;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   const time = ["3h", "24h", "7d", "30d"];
+
   if (isFetching) return <Spinner />;
 
   return (
@@ -121,14 +120,8 @@ const DetailPage = () => {
             </div>
 
             <div className="mt-3.5">
-              {/* <LineChart
-                width={200}
-                height={75}
-                currentPrice={data?.data?.coin.price}
-                coinHistory={coinHistory}
-              /> */}
               <div className="h-fit">
-                <LineChartCoin
+                <LineChart
                   width={350}
                   height={500}
                   datacoin={coinHistory}

@@ -1,68 +1,23 @@
 import { useState, useEffect } from "react";
-import SparkLineChart from "./Chart/SparkLineChart";
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import SparkLineChart from "../Chart/SparkLineChart";
+import useTable from "../hooks/useTable";
+import TablePagination from "./TablePagination";
 
-const calculateRange = (data, rowsPerPage) => {
-  const range = [];
-  const num = Math.ceil(data.length / rowsPerPage);
-  let i = 1;
-  for (let i = 1; i <= num; i++) {
-    range.push(i);
-  }
-  return range;
-};
-
-const sliceData = (data, page, rowsPerPage) => {
-  return data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
-};
-
-const useTable = (data, page, rowsPerPage) => {
-  const [tableRange, setTableRange] = useState([]);
-  const [slice, setSlice] = useState([]);
-
-  useEffect(() => {
-    const range = calculateRange(data, rowsPerPage);
-    setTableRange([...range]);
-
-    const slice = sliceData(data, page, rowsPerPage);
-    setSlice([...slice]);
-  }, [data, setTableRange, page, setSlice]);
-
-  return { slice, range: tableRange };
-};
-
-const TableFooter = ({ range, setPage, page, slice }) => {
-  useEffect(() => {
-    if (slice.length < 1 && page !== 1) {
-      setPage(page - 1);
-    }
-  }, [slice, page, setPage]);
-  return (
-    <div className="inline-flex items-center space-x-1">
-      {range.map((el, index) => (
-        <button
-          key={index}
-          className={`flex text-sm items-center justify-center rounded w-10 h-10
-             border border-gray-300 ${
-               page === el
-                 ? `bg-violet-500 text-white border-violet-300
-                  hover:bg-violet-600`
-                 : `text-gray-500 bg-white hover:bg-violet-200`
-             }`}
-          onClick={() => setPage(el)}
-        >
-          {el}
-        </button>
-      ))}
-    </div>
-  );
-};
-
-const TableCoin = ({ coins = [], rowsPage }) => {
+const TableCrypto = ({ data = [], rowsPerPage }) => {
+  const [page, setPage] = useState(1);
+  const { slice, range } = useTable(data, page, rowsPerPage);
   const navigate = useNavigate();
 
-  const [page, setPage] = useState(1);
-  const { slice, range } = useTable(coins, page, rowsPage);
+  const tableHeader = [
+    "Name",
+    "Price",
+    "Market Cap",
+    "24 Hours Volume",
+    "24 Hours Change",
+    "Chart",
+  ];
+
   const handleNavigate = (coinId) => {
     navigate(`/${coinId}`);
   };
@@ -73,24 +28,11 @@ const TableCoin = ({ coins = [], rowsPage }) => {
         <table className="w-full text-left">
           <thead className="text-slate-900 border-b text-sm">
             <tr>
-              <th scope="col" className="py-5 px-7">
-                Name
-              </th>
-              <th scope="col" className="py-5 px-7">
-                Price
-              </th>
-              <th scope="col" className="py-5 px-7">
-                Market Cap
-              </th>
-              <th scope="col" className="py-5 px-7">
-                24 Hours Volume
-              </th>
-              <th scope="col" className="py-5 px-7">
-                24 Hours Change
-              </th>
-              <th scope="col" className="py-5 px-7">
-                Chart
-              </th>
+              {tableHeader.map((item, i) => (
+                <th key={i} scope="col" className="py-5 px-7">
+                  {item}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
@@ -163,7 +105,7 @@ const TableCoin = ({ coins = [], rowsPage }) => {
         </table>
       </div>
       <div className="mt-8 justify-center flex">
-        <TableFooter
+        <TablePagination
           range={range}
           slice={slice}
           setPage={setPage}
@@ -174,4 +116,4 @@ const TableCoin = ({ coins = [], rowsPage }) => {
   );
 };
 
-export default TableCoin;
+export default TableCrypto;

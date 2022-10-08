@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useGetCoinsQuery } from "../api/coinApi";
-import CardCoin from "../components/CardCoin";
+import CardCoin from "../components/Cards/CardCoin";
 import TableCoin from "../components/TableCoin";
-import TableSkeleton from "../components/TableSkeleton";
+import TableSkeleton from "../components/Skeleton/TableSkeleton";
+import TableCrypto from "../components/Table/TableCrypto";
 
 const IndexPage = () => {
   const { data: coinLists, isFetching } = useGetCoinsQuery(80);
@@ -25,7 +26,7 @@ const IndexPage = () => {
         {isFetching ? (
           <TableSkeleton />
         ) : (
-          <TableCoin coins={coins} rowsPage={10} />
+          <TableCrypto data={coins} rowsPerPage={10} />
         )}
       </div>
     </>

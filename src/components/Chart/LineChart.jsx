@@ -23,7 +23,7 @@ Chart.register(
   LineElement
 );
 
-const LineChartCoin = ({ datacoin, width, height, bdcolor }) => {
+const LineChart = ({ datacoin, width, height, bdcolor }) => {
   const canvas = useRef(null);
   let coinPrice = [];
   let coinTimestamp = [];
@@ -113,4 +113,4 @@ const LineChartCoin = ({ datacoin, width, height, bdcolor }) => {
   );
 };
 
-export default LineChartCoin;
+export default LineChart;
