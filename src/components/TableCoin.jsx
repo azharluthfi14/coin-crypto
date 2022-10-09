@@ -69,7 +69,7 @@ const TableCoin = ({ coins = [], rowsPage }) => {
 
   return (
     <>
-      <div className="overflow-x-auto relative w-full rounded-md bg-white">
+      <div className="overflow-x-auto relative w-full rounded-md bg-white dark:bg-slate-700">
         <table className="w-full text-left">
           <thead className="text-slate-900 border-b text-sm">
             <tr>

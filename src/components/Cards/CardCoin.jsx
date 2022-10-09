@@ -25,7 +25,8 @@ const CardCoin = () => {
         <div
           onClick={() => handleNavigate(coin.uuid)}
           key={coin.uuid}
-          className="bg-white p-3.5 rounded cursor-pointer"
+          className="bg-white p-3.5 border rounded cursor-pointer 
+          dark:bg-dark-800 dark:border-dark-600"
         >
           <div className="flex justify-between items-center">
             <div>
@@ -44,24 +45,24 @@ const CardCoin = () => {
             </div>
           </div>
           <div className="mt-3.5">
-            <span className="font-semibold">
+            <span className="font-semibold dark:text-gray-200">
               {coin.name} - {coin.symbol}
             </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="font-semibold text-xl">
+            <span className="font-semibold text-xl dark:text-gray-200">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
               }).format(coin.price)}
             </span>
             {coin.change < 0 ? (
-              <div className="text-xs w-max flex flex-row items-center font-bold text-red-500 bg-red-100 py-1 px-2 rounded-full ml-3">
+              <div className="text-xs w-max flex flex-row items-center font-bold text-red-500 bg-red-100 py-1 px-2 rounded-full ml-3 dark:bg-red-500/20">
                 {coin.change}%
               </div>
             ) : (
-              <div className="text-xs w-max flex flex-row items-center font-bold text-emerald-500 bg-emerald-100 py-1 px-2  rounded-full ml-3">
-                +{coin.change}%
+              <div className="text-xs w-max flex flex-row items-center font-bold text-emerald-500 bg-emerald-100 py-1 px-2 dark:bg-emerald-500/20 rounded-full ml-3">
+                {coin.change}%
               </div>
             )}
           </div>

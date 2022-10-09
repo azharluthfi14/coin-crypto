@@ -61,7 +61,7 @@ const SparkLineChart = ({ data = [], width, height, statusBg, statusBd }) => {
           backgroundColor: "transparent",
         },
         layout: {
-          padding: 0,
+          padding: 3,
         },
         scales: {
           x: {

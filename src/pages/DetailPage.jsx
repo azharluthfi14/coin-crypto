@@ -33,7 +33,8 @@ const DetailPage = () => {
           <li className="inline-flex items-center">
             <div
               onClick={() => handleBack()}
-              className="inline-flex items-center cursor-pointer hover:underline text-sm font-medium text-gray-700 hover:text-gray-900"
+              className="inline-flex items-center cursor-pointer hover:underline text-sm 
+              font-medium text-gray-700 hover:text-violet-500 dark:text-gray-400"
             >
               Home
             </div>
@@ -60,13 +61,13 @@ const DetailPage = () => {
         </ol>
       </nav>
       <article className="mt-5">
-        <div className="flex items-center space-x-3 mb-5">
+        <div className="flex items-center space-x-3 mb-5 dark:text-gray-400">
           <img className="w-10 h-10" src={data?.data?.coin.iconUrl} alt="" />
           <span className="font-semibold text-lg">{data?.data?.coin.name}</span>
           <span>{data?.data?.coin.symbol}</span>
         </div>
 
-        <div className="bg-white p-5 shadow rounded-md">
+        <div className="bg-white dark:bg-dark-900 dark:text-gray-200 rounded-md">
           <div className="flex items-center mb-2">
             <h1 className="font-normal">
               {new Intl.NumberFormat("en-US", {
@@ -85,11 +86,13 @@ const DetailPage = () => {
                   +{data?.data?.coin.change}%
                 </div>
               )}
-              <span className="font-semibold text-slate-800 ml-1">(24H)</span>
+              <span className="font-semibold text-slate-800 dark:text-gray-400 ml-1">
+                (24H)
+              </span>
             </>
           </div>
           <div className="mb-5">
-            <span className="text-slate-800 font-semibold">
+            <span className="text-slate-800 font-semibold dark:text-gray-200">
               {new Intl.NumberFormat("en-US", {
                 currency: "USD",
                 maximumSignificantDigits: 4,
@@ -130,15 +133,15 @@ const DetailPage = () => {
               </div>
               <div className="mt-5 flex space-x-10 items-center">
                 <div>
-                  <h5 className="font-semibold mb-1 text-sm text-slate-700">
+                  <h5 className="font-semibold mb-1 text-sm text-slate-700 dark:text-slate-300">
                     Market Cap (USD)
                   </h5>
-                  <span className="font-semibold text-xl">
+                  <span className="font-semibold text-xl ">
                     ${millify(data?.data?.coin.marketCap, { precision: 3 })}
                   </span>
                 </div>
                 <div>
-                  <h5 className="font-semibold mb-1 text-sm text-slate-700">
+                  <h5 className="font-semibold mb-1 text-sm text-slate-700 dark:text-slate-300">
                     24H VOLUME (USD)
                   </h5>
                   <span className="font-semibold text-xl">
@@ -146,7 +149,7 @@ const DetailPage = () => {
                   </span>
                 </div>
                 <div>
-                  <h5 className="font-semibold mb-1 text-sm text-slate-700">
+                  <h5 className="font-semibold mb-1 text-sm text-slate-700 dark:text-slate-300">
                     Circulating Supply
                   </h5>
                   <span className="font-semibold text-xl">
@@ -157,7 +160,7 @@ const DetailPage = () => {
                   </span>
                 </div>
                 <div>
-                  <h5 className="font-semibold mb-1 text-sm text-slate-700">
+                  <h5 className="font-semibold mb-1 text-sm text-slate-700 dark:text-slate-300">
                     Max Supply
                   </h5>
                   {data?.data?.coin.supply.max === null ? (
