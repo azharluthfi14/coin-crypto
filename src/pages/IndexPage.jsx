@@ -27,7 +27,7 @@ const IndexPage = () => {
       </h5>
       <div className="flex flex-col">
         {isFetching ? (
-          <Spinner />
+          <TableSkeleton count={10} />
         ) : (
           <TableCrypto data={coins} rowsPerPage={10} />
         )}

@@ -14,9 +14,11 @@ const TablePagination = ({ range, setPage, page, slice }) => {
           className={`flex text-sm items-center justify-center rounded w-10 h-10
          border border-gray-300 ${
            page === indexPage
-             ? `bg-violet-500 text-white border-violet-300
+             ? `bg-violet-500 text-white border-violet-500
               hover:bg-violet-600`
-             : `text-gray-500 bg-white hover:bg-violet-200`
+             : `text-gray-500 bg-white hover:bg-violet-200 
+             dark:bg-dark-800 dark:border-dark-700 dark:text-gray-300
+             dark:hover:bg-dark-900/30`
          }`}
           onClick={() => setPage(indexPage)}
         >

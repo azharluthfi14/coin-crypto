@@ -8,21 +8,27 @@ import Spinner from "../components/Spinner";
 const DetailPage = () => {
   const { coinId } = useParams();
   const [timeperiod, setTimeperiod] = useState("1h");
+
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
   };
 
   const { data, isFetching } = useGetCoinDetailsQuery(coinId);
+
   const { data: coinHistory } = useGetCoinHistoryQuery({
     coinId,
     timeperiod,
   });
 
+  const handleClick = (e) => {
+    setTimeperiod(e.target.value);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const time = ["3h", "24h", "7d", "30d"];
+  const time = ["1h", "3h", "24h", "7d", "30d"];
 
   if (isFetching) return <Spinner />;
 
@@ -67,7 +73,7 @@ const DetailPage = () => {
           <span>{data?.data?.coin.symbol}</span>
         </div>
 
-        <div className="bg-white dark:bg-dark-900 dark:text-gray-200 rounded-md">
+        <div className="bg-white p-3 dark:bg-dark-900 dark:text-gray-200 rounded-md">
           <div className="flex items-center mb-2">
             <h1 className="font-normal">
               {new Intl.NumberFormat("en-US", {
@@ -110,11 +116,17 @@ const DetailPage = () => {
               <div className="flex items-center space-x-3">
                 {time.map((item) => (
                   <button
-                    className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 "
+                    onClick={handleClick}
+                    className={`py-2.5 px-5 text-sm font-medium focus:outline-none
+                    rounded-lg border
+                ${
+                  timeperiod === item
+                    ? "bg-violet-500 border-violet-500 text-white"
+                    : "bg-white hover:bg-violet-500/20 hover:text-violet-500 text-neutral-800 dark:bg-dark-700 dark:border-dark-500 dark:text-gray-200 dark:hover:bg-dark-800"
+                }`}
                     type="submit"
                     key={item}
                     value={item}
-                    onClick={(e) => setTimeperiod(e.target.value)}
                   >
                     {item}
                   </button>

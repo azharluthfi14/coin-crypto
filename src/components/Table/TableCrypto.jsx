@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SparkLineChart from "../Chart/SparkLineChart";
-import useTable from "../hooks/useTable";
+import useTable from "../../hooks/useTable";
 import TablePagination from "./TablePagination";
 
 const TableCrypto = ({ data = [], rowsPerPage }) => {
@@ -123,7 +123,7 @@ const TableCrypto = ({ data = [], rowsPerPage }) => {
             </tbody>
           </table>
         </div>
-        <div className="mt-10 z-30">
+        <div className="mt-10 text-center">
           <TablePagination
             range={range}
             slice={slice}
