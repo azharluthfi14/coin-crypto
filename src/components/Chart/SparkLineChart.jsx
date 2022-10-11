@@ -61,7 +61,7 @@ const SparkLineChart = ({ data = [], width, height, statusBg, statusBd }) => {
           backgroundColor: "transparent",
         },
         layout: {
-          padding: 3,
+          padding: 10,
         },
         scales: {
           x: {
@@ -87,7 +87,7 @@ const SparkLineChart = ({ data = [], width, height, statusBg, statusBd }) => {
         intersect: false,
         mode: "nearest",
       },
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       resizeDelay: 200,
     });
     return () => chart.destroy();

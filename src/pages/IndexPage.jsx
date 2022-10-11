@@ -19,7 +19,7 @@ const IndexPage = () => {
       <h5 className="mb-3.5 text-xl font-semibold dark:text-gray-200">
         Top Metaverse Tokens
       </h5>
-      <div className="grid grid-rows-1 md:grid-cols-4 gap-3 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-10">
         <CardCoin />
       </div>
       <h5 className="mb-3.5 text-xl font-semibold dark:text-gray-200">

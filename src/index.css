@@ -38,4 +38,34 @@
     max-width: 78.75rem;
     @apply mx-auto w-11/12;
   }
+
+  .read-more-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 5px;
+  }
+
+  .read-more-light {
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 1) 22%,
+      rgba(255, 255, 255, 0.5102415966386555) 55%,
+      rgba(255, 255, 255, 0.38699229691876746) 80%,
+      rgba(255, 255, 255, 0.014443277310924318) 100%
+    );
+  }
+
+  .read-more-dark {
+    background: linear-gradient(
+      0deg,
+      rgba(30, 32, 38, 1) 22%,
+      rgba(30, 32, 38, 0.5158438375350141) 55%,
+      rgba(30, 32, 38, 0.3225665266106442) 80%,
+      rgba(30, 32, 38, 0.022846638655462215) 100%
+    );
+  }
 }

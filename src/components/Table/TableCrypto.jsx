@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import millify from "millify";
 import SparkLineChart from "../Chart/SparkLineChart";
 import useTable from "../../hooks/useTable";
 import TablePagination from "./TablePagination";
@@ -25,19 +26,18 @@ const TableCrypto = ({ data = [], rowsPerPage }) => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="overflow-x-auto w-full rounded-lg bg-white dark:bg-dark-800">
-          <table className="w-full">
-            <thead className="border-b dark:text-gray-400 dark:border-dark-600">
-              <tr>
-                {tableHeader.map((item, i) => (
-                  <th
-                    key={i}
-                    scope="col"
-                    className="px-6 py-4 font-semibold text-sm uppercase"
-                  >
-                    {item}
-                  </th>
-                ))}
+        <div className="overflow-x-auto overflow-y-hidden w-full rounded-lg bg-white dark:bg-dark-800">
+          <table className="w-full table-auto min-w-max">
+            <thead className="border-b font-semibold text-xs md:text-base whitespace-nowrap uppercase dark:text-gray-400 dark:border-dark-600">
+              <tr className="text-center">
+                <th className=" py-3 px-6 text-left">Name</th>
+                <th className="py-3 px-6 text-center">Price</th>
+                <th className=" py-3 px-6 text-center">Market Cap</th>
+                <th className=" py-3 px-6 text-center">24 Hours Volume</th>
+                <th className=" py-3 px-6 text-center">24 Hours Change</th>
+                <th className="hidden relative lg:inline-flex lg:p-3 w-full">
+                  <span className="m-auto">Chart</span>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-dark-600">
@@ -45,72 +45,58 @@ const TableCrypto = ({ data = [], rowsPerPage }) => {
                 <tr
                   key={coin.uuid}
                   onClick={() => handleNavigate(coin.uuid)}
-                  className="hover:bg-violet-100  
-                  font-normal 
-                cursor-pointer dark:hover:bg-dark-700 dark:text-gray-400"
+                  className="hover:bg-violet-100 w-full font-normal cursor-pointer 
+                  dark:hover:bg-dark-700 dark:text-gray-400"
                 >
-                  <td
-                    scope="row"
-                    className="flex px-6 py-4 whitespace-nowrap items-center space-x-3 dark:text-slate-300 dark:border-slate-500"
-                  >
-                    <img
-                      className="w-8 h-8"
-                      src={coin.iconUrl}
-                      alt="icon-coin"
-                    />
-                    <span>
-                      {coin.name} - {coin.symbol}
-                    </span>
+                  <td className="py-3 px-6 text-left whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="mr-3">
+                        <img
+                          className="w-4 h-4 md:w-8 md:h-8"
+                          src={coin.iconUrl}
+                          alt="icon-coin"
+                        />
+                      </div>
+                      <div className="">
+                        <span className="hidden lg:inline">{coin.name} - </span>
+                        <span> {coin.symbol}</span>
+                      </div>
+                    </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span>
-                      {new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(coin.price)}
-                    </span>
+                  <td className="py-3 px-6 text-center">
+                    <span>${millify(coin.price, { precision: 3 })}</span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span>
-                      {new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(coin.marketCap)}
-                    </span>
+                  <td className="py-3 px-6 text-center">
+                    <span>${millify(coin.marketCap, { precision: 7 })}</span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span>
-                      {new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(coin["24hVolume"])}
-                    </span>
+                  <td className="py-3 px-6 text-center">
+                    <span>${millify(coin["24hVolume"], { precision: 7 })}</span>
                   </td>
-                  <td className="px-20 py-4 whitespace-nowrap justify-center">
+                  <td className="py-3 px-6 text-center">
                     {coin.change <= 0 ? (
                       <span
-                        className="text-xs w-max flex py-1 px-2 items-center font-bold
+                        className="text-xs w-max py-1 px-2 font-bold
                      text-red-500 bg-red-100 rounded-full dark:bg-red-500/20"
                       >
                         {coin.change}%
                       </span>
                     ) : (
                       <span
-                        className="text-xs w-max flex py-1 px-2 items-center font-bold 
+                        className="text-xs w-max py-1 px-2   font-bold 
                     text-emerald-500 bg-emerald-100 rounded-full dark:bg-emerald-500/20"
                       >
                         {coin.change}%
                       </span>
                     )}
                   </td>
-                  <td className="px-5 py-1">
-                    <div className="w-max">
+                  <td className="hidden lg:flex py-3">
+                    <div className="relative m-auto h-[9vh] w-[12vw]">
                       <SparkLineChart
                         data={coin.sparkline
                           .filter((v) => !!v)
                           .map((v) => parseFloat(v))}
-                        width={200}
-                        height={50}
+                        width={180}
+                        height={70}
                         statusBg={
                           coin.change <= 0 ? "transparent" : "transparent"
                         }

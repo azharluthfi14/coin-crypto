@@ -2,8 +2,8 @@ import React from "react";
 
 const Spinner = () => {
   return (
-    <div className="h-screen flex z-30  mt-40 justify-center">
-      <div className="flex flex-col items-center text-center">
+    <>
+      <div className="flex flex-col justify-center items-center">
         <svg
           className="animate-spin h-12 w-12 text-violet-500"
           xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ const Spinner = () => {
         </svg>
         <h5 className="mt-5 text-slate-500">Fetching data</h5>
       </div>
-    </div>
+    </>
   );
 };
 

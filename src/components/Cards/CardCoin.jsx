@@ -25,8 +25,8 @@ const CardCoin = () => {
         <div
           onClick={() => handleNavigate(coin.uuid)}
           key={coin.uuid}
-          className="bg-white p-3.5 border rounded cursor-pointer 
-          dark:bg-dark-800 dark:border-dark-600"
+          className="bg-white p-3.5 rounded cursor-pointer 
+          dark:bg-dark-800"
         >
           <div className="flex justify-between items-center">
             <div>
