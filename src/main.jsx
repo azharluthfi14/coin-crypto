@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import "swiper/css";
 import "./utils/ChartjsConfig";
 import { Provider } from "react-redux";
 import { store } from "./app/store";

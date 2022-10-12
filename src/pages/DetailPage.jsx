@@ -27,9 +27,9 @@ const DetailPage = () => {
     setTimeperiod(e.target.value);
   };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
-  }, []); */
+  }, []);
   const time = ["1h", "3h", "24h", "7d", "30d"];
 
   const [readMore, setIsReadMore] = useState(true);
@@ -176,7 +176,9 @@ const DetailPage = () => {
                     Market Cap (USD)
                   </h5>
                   <span className="font-semibold text-xl ">
-                    ${millify(coinDetail.marketCap, { precision: 3 })}
+                    $
+                    {coinDetail.marketCap &&
+                      millify(coinDetail.marketCap, { precision: 3 })}
                   </span>
                 </div>
                 <div>
@@ -184,7 +186,9 @@ const DetailPage = () => {
                     24H VOLUME (USD)
                   </h5>
                   <span className="font-semibold text-xl">
-                    ${millify(coinDetail["24hVolume"], { precision: 3 })}
+                    $
+                    {coinDetail["24hVolume"] &&
+                      millify(coinDetail["24hVolume"], { precision: 3 })}
                   </span>
                 </div>
                 <div>
@@ -192,9 +196,10 @@ const DetailPage = () => {
                     Circulating Supply
                   </h5>
                   <span className="font-semibold text-xl">
-                    {millify(coinDetail?.supply.circulating, {
-                      precision: 3,
-                    })}{" "}
+                    {coinDetail?.supply.circulating &&
+                      millify(coinDetail?.supply.circulating, {
+                        precision: 3,
+                      })}{" "}
                     {coinDetail.symbol}
                   </span>
                 </div>
@@ -219,7 +224,7 @@ const DetailPage = () => {
       <article className="bg-white p-8 w-full rounded mt-10  dark:bg-dark-800 ">
         <div className="flex items-center space-x-3 mb-8">
           <h1 className="dark:text-gray-300">About {coinDetail.name}</h1>
-          <h5 className="bg-violet-500 py-1 px-5 text-white text-ms font-semibold rounded">
+          <h5 className="bg-violet-500 py-1 px-3 md:px-5 text-white text-ms whitespace-nowrap font-semibold rounded">
             Rank #{coinDetail.rank}
           </h5>
         </div>

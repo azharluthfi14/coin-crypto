@@ -7,12 +7,12 @@ const TablePagination = ({ range, setPage, page, slice }) => {
     }
   }, [slice, setPage, page]);
   return (
-    <div className="inline-flex items-center space-x-1">
+    <div className="inline-flex items-center space-x-2.5 md:space-x-1">
       {range.map((indexPage, index) => (
         <button
           key={index}
-          className={`flex text-sm items-center justify-center rounded w-10 h-10
-         border border-gray-300 ${
+          className={`flex text-sm items-center justify-center rounded w-8 h-8
+         border border-gray-300 md:w-10 md:h-10 ${
            page === indexPage
              ? `bg-violet-500 text-white border-violet-500
               hover:bg-violet-600`

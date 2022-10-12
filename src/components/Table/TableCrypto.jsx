@@ -109,7 +109,7 @@ const TableCrypto = ({ data = [], rowsPerPage }) => {
             </tbody>
           </table>
         </div>
-        <div className="mt-10 text-center">
+        <div className="mt-7 text-center">
           <TablePagination
             range={range}
             slice={slice}
