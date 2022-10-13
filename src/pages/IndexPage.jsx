@@ -10,7 +10,7 @@ import "swiper/css/scrollbar";
 
 const IndexPage = () => {
   const { data: coinLists, isFetching } = useGetCoinsQuery(80);
-  const { data: stableCoin } = useGetStableCoinsQuery(20);
+  const { data: stableCoin } = useGetStableCoinsQuery(30);
   const [coins, setCoins] = useState();
   const [stable, setStable] = useState();
   const [controlledSwiper, setControlledSwiper] = useState(null);
@@ -24,43 +24,44 @@ const IndexPage = () => {
       <h5 className="mb-3.5 text-xl font-semibold dark:text-gray-200">
         Top Metaverse Tokens
       </h5>
-      <Swiper
-        modules={[Controller, Autoplay]}
-        controller={{ control: controlledSwiper }}
-        spaceBetween={15}
-        className="mb-6"
-        loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        breakpoints={{
-          1024: {
-            slidesPerView: 3,
-            spaceBetweenSlides: 150,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetweenSlides: 200,
-          },
-          640: {
-            slidesPerView: 1,
-            spaceBetweenSlides: 200,
-          },
-        }}
-      >
-        {isFetching ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <CardSkeleton count={3} />
-          </div>
-        ) : (
-          stable?.map((i) => (
+
+      {isFetching ? (
+        <div className="grid grid-rows-1 grid-flow-col md:grid-cols-3 gap-3 mb-6">
+          <CardSkeleton count={3} />
+        </div>
+      ) : (
+        <Swiper
+          modules={[Controller, Autoplay]}
+          controller={{ control: controlledSwiper }}
+          spaceBetween={15}
+          className="mb-6"
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          breakpoints={{
+            1024: {
+              slidesPerView: 3,
+              spaceBetweenSlides: 150,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetweenSlides: 200,
+            },
+            640: {
+              slidesPerView: 1,
+              spaceBetweenSlides: 200,
+            },
+          }}
+        >
+          {stable?.map((i) => (
             <SwiperSlide key={i.uuid}>
               <CardCoin coin={i} />
             </SwiperSlide>
-          ))
-        )}
-      </Swiper>
+          ))}
+        </Swiper>
+      )}
       <h5 className="mb-3.5 text-xl font-semibold dark:text-gray-200">
         Today's Cryptocurrency Prices
       </h5>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import millify from "millify";
 import SparkLineChart from "../Chart/SparkLineChart";
@@ -9,15 +9,6 @@ const TableCrypto = ({ data = [], rowsPerPage }) => {
   const [page, setPage] = useState(1);
   const { slice, range } = useTable(data, page, rowsPerPage);
   const navigate = useNavigate();
-
-  const tableHeader = [
-    "Name",
-    "Price",
-    "Market Cap",
-    "24 Hours Volume",
-    "24 Hours Change",
-    "Chart",
-  ];
 
   const handleNavigate = (coinId) => {
     navigate(`/${coinId}`);

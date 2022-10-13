@@ -14,6 +14,7 @@ const CardSkeleton = ({ count }) => {
         <div className="space-y-3">
           <div className="h-2.5 w-32 bg-gray-300 rounded dark:bg-dark-700"></div>
           <div className="h-2.5 w-40 bg-gray-300 rounded dark:bg-dark-700"></div>
+          <div className="h-2.5 w-48 bg-gray-300 rounded dark:bg-dark-700"></div>
         </div>
       </div>
     </div>

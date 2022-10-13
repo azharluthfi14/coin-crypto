@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="layout flex justify-between items-center">
         <div className="flex flex-row items-center space-x-20">
           <Link className="font-bold text-slate-800 text-xl" to="/">
-            <span className="dark:text-gray-200">Encrypto.</span>
+            <span className="dark:text-gray-200">Coinancy.</span>
             <span className="text-violet-500">com</span>
           </Link>
           <ul className="hidden md:flex flex-row items-center space-x-8">

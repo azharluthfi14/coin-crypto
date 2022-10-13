@@ -7,6 +7,9 @@ export const store = configureStore({
     [coinApi.reducerPath]: coinApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(coinApi.middleware),
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }).concat(coinApi.middleware),
 });
 setupListeners(store.dispatch);
