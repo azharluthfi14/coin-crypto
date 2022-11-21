@@ -11,7 +11,7 @@
   }
 
   body {
-    @apply text-sm md:text-base;
+    @apply text-sm md:text-base bg-gray-100 dark:bg-dark-900;
   }
 
   h1 {

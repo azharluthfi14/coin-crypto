@@ -13,7 +13,7 @@ const Stats = () => {
 
   return (
     <div className="hidden md:block bg-white border-b dark:border-dark-800 dark:bg-dark-900">
-      <div className="layout text-sm font-semibold h-12 space-x-7 flex flex-row items-center dark:text-gray-400">
+      <div className="layout text-xs lg:text-sm font-semibold h-12 space-x-7 flex flex-row items-center dark:text-gray-400">
         <div>
           Coins :{" "}
           <span className="dark:text-white">

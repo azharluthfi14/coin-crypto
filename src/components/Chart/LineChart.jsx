@@ -81,7 +81,7 @@ const LineChart = ({ datacoin, width, height, bdcolor }) => {
           },
         },
         layout: {
-          padding: 30,
+          padding: 0,
         },
         plugins: {
           tooltip: {

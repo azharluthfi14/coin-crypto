@@ -4,7 +4,7 @@ const CardSkeleton = ({ count }) => {
   return [...Array(count).keys()].map((i) => (
     <div
       key={i}
-      className="bg-white border dark:border-dark-700 w-full p-3.5 rounded dark:bg-dark-800"
+      className="bg-white w-full h-full max-h-md p-3.5  rounded dark:bg-dark-800"
     >
       <div className="animate-pulse">
         <div className="flex justify-between items-center mb-5">
